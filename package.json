@@ -1,0 +1,28 @@
+{
+  "name": "studio-beauty-website",
+  "version": "1.0.0",
+  "description": "Website moderno de cabeleleiro com LESS.css e Firebase",
+  "main": "index.html",
+  "scripts": {
+    "compile-less": "lessc css/main.less css/main.css",
+    "watch": "lessc --watch css/main.less css/main.css",
+    "serve": "http-server -p 8000",
+    "dev": "npm run watch & npm run serve"
+  },
+  "keywords": [
+    "cabeleleiro",
+    "salão de beleza",
+    "website",
+    "less",
+    "firebase"
+  ],
+  "author": "Studio Beauty",
+  "license": "MIT",
+  "devDependencies": {
+    "less": "^4.1.3",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "firebase": "^10.5.0"
+  }
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Rios | Painel do Dono</title>
+    <link rel="icon" href="img/icon.jpeg" type="image/jpeg">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark"><img src="img/icon.png" style="width: 48px; height: 48px; object-fit: contain;"></span>
+                <div>
+                    <strong>Barbearia Rios</strong>
+                    <span>Painel do dono</span>
+                </div>
+            </a>
+
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Agendar</a>
+                <a href="meus-agendamentos.html" class="nav-link">Meus agendamentos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="workspace-section" id="adminLoginShell">
+            <div class="container login-shell">
+                <div class="login-card">
+                    <span class="eyebrow">Acesso restrito</span>
+                    <h1>Painel do dono</h1>
+                    <p>Entre para acessar o controle do salao.</p>
+
+                    <form id="adminLoginForm" class="booking-form">
+                        <div class="form-grid">
+                            <label class="field field-full">
+                                <span>Usuario</span>
+                                <input type="text" id="adminUsername" placeholder="Usuario" required>
+                            </label>
+                            <label class="field field-full">
+                                <span>Senha</span>
+                                <input type="password" id="adminPassword" placeholder="Senha" required>
+                            </label>
+                        </div>
+                        <p class="error-text" id="adminLoginError"></p>
+                        <div class="step-actions">
+                            <button type="submit" class="btn btn-primary">Entrar no painel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace-section hidden" id="adminPanelShell">
+            <div class="container page-shell">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Painel do dono</span>
+                        <h2>Controle do salao</h2>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn btn-secondary" id="logoutBtn">Sair</button>
+                    </div>
+                </div>
+
+                <div class="admin-layout">
+                    <section class="admin-card">
+                        <div class="admin-card__header">
+                            <h3>Produtos</h3>
+                            <p>Gerencie produtos como Gel, Minoxidil, Óleo de barba etc.</p>
+                        </div>
+                        <form id="productsForm" class="admin-form">
+                            <div class="editable-list" id="productsEditor"></div>
+                            <div class="step-actions">
+                                <button type="submit" class="btn btn-primary">Salvar produtos</button>
+                                <button type="button" class="btn btn-secondary" id="addProductBtn">+ Adicionar produto</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="admin-card">
+                        <div class="admin-card__header">
+                            <h3>Serviços e valores</h3>
+                            <p>Edite os preços base sem entrar no código.</p>
+                        </div>
+                        <form id="servicesForm" class="admin-form">
+                            <div class="editable-list" id="servicesEditor"></div>
+                            <div class="step-actions">
+                                <button type="submit" class="btn btn-primary">Salvar serviços</button>
+                                <button type="button" class="btn btn-secondary" id="addServiceBtn">+ Adicionar serviço</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="admin-card theme-card" id="themeCard">
+                        <div class="admin-card__header" style="justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3>Personalização visual</h3>
+                                <p>Muda as cores principais em tempo real usando variáveis CSS.</p>
+                            </div>
+                        </div>
+                        <div class="theme-preview" id="themePreview" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+                            <div style="text-align: center;">
+                                <div id="previewPrimary" style="width: 100%; height: 60px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--line);"></div>
+                                <span style="font-size: 0.78rem; color: var(--muted);">Principal</span>
+                            </div>
+                            <div style="text-align: center;">
+                                <div id="previewAccent" style="width: 100%; height: 60px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--line);"></div>
+                                <span style="font-size: 0.78rem; color: var(--muted);">Destaque</span>
+                            </div>
+                            <div style="text-align: center;">
+                                <div id="previewSurface" style="width: 100%; height: 60px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--line);"></div>
+                                <span style="font-size: 0.78rem; color: var(--muted);">Fundo</span>
+                            </div>
+                        </div>
+                        <form id="themeForm" class="admin-form" id="themeFormContent" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                            <div class="form-grid form-grid--compact">
+                                <label class="field">
+                                    <span>Cor principal</span>
+                                    <input type="color" id="themePrimary">
+                                </label>
+                                <label class="field">
+                                    <span>Cor destaque</span>
+                                    <input type="color" id="themeAccent">
+                                </label>
+                                <label class="field">
+                                    <span>Cor de fundo</span>
+                                    <input type="color" id="themeSurface">
+                                </label>
+                            </div>
+                            <div class="step-actions">
+                                <button type="submit" class="btn btn-primary">Salvar cores</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="admin-card">
+                        <div class="admin-card__header">
+                            <h3>Gerenciar Profissionais</h3>
+                            <p>Adicione ou remova barbeiros da barbearia.</p>
+                        </div>
+                        <form id="professionalsForm" class="admin-form">
+                            <div class="editable-list" id="professionalsEditor"></div>
+                            <div class="step-actions">
+                                <button type="submit" class="btn btn-primary">Salvar profissionais</button>
+                                <button type="button" class="btn btn-secondary" id="addProfessionalBtn">+ Adicionar profissional</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="admin-card">
+                        <form id="schedulesForm" class="admin-form">
+                            <div id="schedulesEditor"></div>
+                            <div class="step-actions">
+                                <button type="submit" class="btn btn-primary">Salvar horarios</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="admin-card admin-card--wide">
+                        <div class="admin-card__header">
+                            <h3>Visualizar agenda do dia</h3>
+                            <p>Veja todos os agendamentos de um dia em ordem de horario.</p>
+                        </div>
+                        <div class="admin-form">
+                            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                                <button type="button" class="icon-btn" id="agendaPrevMonth" aria-label="Mes anterior">&#8592;</button>
+                                <div style="flex: 1;">
+                                    <span class="calendar-label">Selecione um dia</span>
+                                    <h4 id="agendaMonthLabel" style="margin: 6px 0 0; font-size: 1.28rem;">Mes</h4>
+                                </div>
+                                <button type="button" class="icon-btn" id="agendaNextMonth" aria-label="Proximo mes">&#8594;</button>
+                            </div>
+                            
+                            <div class="calendar-grid calendar-weekdays" id="agendaCalendarWeekdays"></div>
+                            <div class="calendar-grid" id="agendaCalendarDays" style="margin-bottom: 20px;"></div>
+                            
+                            <div id="agendaDayView" style="margin-top: 20px;"></div>
+                        </div>
+                    </section>
+
+                    <section class="admin-card admin-card--wide">
+                        <div class="admin-card__header">
+                            <h3>Relatorio de vendas</h3>
+                            <p>Visualize vendas, receitas e gastos do mes. Dados salvos por 3 meses.</p>
+                        </div>
+                        <div class="admin-form">
+                            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                                <label class="field" style="flex: 1;">
+                                    <span>Mes</span>
+                                    <input type="month" id="monthPicker">
+                                </label>
+                                <button type="button" class="btn btn-primary" id="downloadReportBtn" style="align-self: flex-end;">📄 Baixar PDF</button>
+                            </div>
+                            <div id="salesReportView" style="margin-top: 20px;"></div>
+                        </div>
+                    </section>
+
+                    <section class="admin-card admin-card--wide">
+                        <div class="admin-card__header">
+                            <h3>Gestao de agendamentos</h3>
+                            <p>Voce consegue alterar data, horario, status e ate cancelar rapidamente.</p>
+                        </div>
+                        <div class="admin-bookings" id="adminBookings"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <strong>Barbearia Rios</strong>
+                <p>Painel administrativo separado do fluxo do cliente.</p>
+            </div>
+            <div class="footer-meta">
+                <span>Controle interno da barbearia.</span>
+                <span id="footerNow">Atualizado agora</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/firebase-config.js?v=20260509-4"></script>
+    <script src="js/app.js?v=20260509-4"></script>
+    <script src="js/admin.js?v=20260509-4"></script>
+</body>
+</html>

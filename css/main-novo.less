@@ -1,0 +1,757 @@
+// ============================================
+// VARIÁVEIS - DESIGN MINIMALISTA MODERNO
+// ============================================
+
+// Cores
+@primary: #1F2937;        // Cinza escuro (principal)
+@secondary: #6366F1;      // Roxo/Índigo (destaque)
+@accent: #EC4899;         // Rosa (ação)
+@bg-light: #F9FAFB;       // Fundo muito claro
+@bg-card: #FFFFFF;        // Branco (cards)
+@text-dark: #111827;      // Texto escuro
+@text-light: #6B7280;     // Texto leve
+@border: #E5E7EB;         // Bordas
+
+// Cores de disponibilidade
+@color-livre: #10B981;    // Verde
+@color-medio: #F59E0B;    // Amarelo/Âmbar
+@color-cheio: #EF4444;    // Vermelho
+
+// Spacing
+@spacing-1: 4px;
+@spacing-2: 8px;
+@spacing-3: 12px;
+@spacing-4: 16px;
+@spacing-5: 20px;
+@spacing-6: 24px;
+@spacing-8: 32px;
+@spacing-10: 40px;
+@spacing-12: 48px;
+
+// Outros
+@border-radius: 8px;
+@border-radius-lg: 12px;
+@shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+@shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+@shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+@transition: 0.3s ease-in-out;
+
+// ============================================
+// RESET E GLOBAL
+// ============================================
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    background-color: @bg-light;
+    color: @text-dark;
+    line-height: 1.6;
+}
+
+a {
+    color: @secondary;
+    text-decoration: none;
+    transition: color @transition;
+
+    &:hover {
+        color: darken(@secondary, 10%);
+    }
+}
+
+// ============================================
+// CONTAINER
+// ============================================
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 @spacing-4;
+
+    &--narrow {
+        max-width: 600px;
+    }
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.header {
+    background-color: @bg-card;
+    border-bottom: 1px solid @border;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: @shadow-sm;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: @spacing-4;
+    }
+
+    &__logo {
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: @primary;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        gap: @spacing-8;
+
+        @media (max-width: 640px) {
+            gap: @spacing-4;
+        }
+    }
+}
+
+.nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-light;
+    transition: color @transition;
+
+    &:hover,
+    &.active {
+        color: @secondary;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 12px;
+    }
+}
+
+// ============================================
+// HERO MINIMALISTA
+// ============================================
+
+.hero {
+    background: linear-gradient(135deg, @primary 0%, darken(@primary, 10%) 100%);
+    color: white;
+    padding: @spacing-12 @spacing-4;
+    text-align: center;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: @spacing-3;
+
+        @media (max-width: 640px) {
+            font-size: 24px;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        opacity: 0.9;
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+// ============================================
+// MAIN CONTENT
+// ============================================
+
+.main-content {
+    padding: @spacing-8 @spacing-4;
+
+    @media (max-width: 640px) {
+        padding: @spacing-6 @spacing-4;
+    }
+}
+
+// ============================================
+// STEPS/ETAPAS
+// ============================================
+
+.agendamento-wrapper {
+    position: relative;
+}
+
+.step {
+    display: none;
+    opacity: 0;
+    transition: opacity @transition;
+
+    &.active {
+        display: block;
+        opacity: 1;
+    }
+
+    &__title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: @spacing-6;
+        color: @primary;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: @spacing-4;
+        margin-top: @spacing-8;
+        justify-content: space-between;
+
+        @media (max-width: 640px) {
+            flex-direction: column-reverse;
+        }
+    }
+}
+
+// ============================================
+// SERVIÇOS GRID
+// ============================================
+
+.servicos-grid,
+.profissionais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: @spacing-4;
+    margin-bottom: @spacing-6;
+}
+
+.servico-item,
+.profissional-item {
+    padding: @spacing-4;
+    border: 2px solid @border;
+    border-radius: @border-radius-lg;
+    text-align: center;
+    cursor: pointer;
+    transition: all @transition;
+    background-color: @bg-card;
+
+    &:hover {
+        border-color: @secondary;
+        box-shadow: @shadow-md;
+    }
+
+    &.selected {
+        background-color: @secondary;
+        color: white;
+        border-color: @secondary;
+    }
+
+    .icon {
+        font-size: 32px;
+        margin-bottom: @spacing-3;
+        display: block;
+    }
+
+    .name {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: @spacing-2;
+        display: block;
+    }
+
+    .price {
+        font-size: 16px;
+        font-weight: 700;
+        color: @secondary;
+
+        .selected & {
+            color: white;
+        }
+    }
+}
+
+// ============================================
+// CALENDÁRIO
+// ============================================
+
+.calendario-wrapper {
+    background-color: @bg-card;
+    padding: @spacing-6;
+    border-radius: @border-radius-lg;
+    box-shadow: @shadow-sm;
+    margin-bottom: @spacing-6;
+}
+
+.calendario-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: @spacing-6;
+
+    h4 {
+        font-size: 16px;
+        font-weight: 600;
+        min-width: 150px;
+        text-align: center;
+    }
+
+    .btn--icon {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        padding: @spacing-2;
+        transition: color @transition;
+        color: @secondary;
+
+        &:hover {
+            color: darken(@secondary, 10%);
+        }
+    }
+}
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: @spacing-2;
+    margin-bottom: @spacing-6;
+
+    .dia-semana {
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        color: @text-light;
+        padding: @spacing-3;
+        text-transform: uppercase;
+    }
+
+    .dia {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: @border-radius;
+        cursor: pointer;
+        border: 1px solid @border;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all @transition;
+        background-color: white;
+
+        &:hover:not(.disabled):not(.outro-mes) {
+            border-color: @secondary;
+            box-shadow: @shadow-md;
+        }
+
+        &.outro-mes {
+            color: @text-light;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &.disabled {
+            background-color: #F3F4F6;
+            color: @text-light;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        &.selected {
+            background-color: @secondary;
+            color: white;
+            border-color: @secondary;
+        }
+
+        // Cores de disponibilidade
+        &.livre {
+            background-color: lighten(@color-livre, 40%);
+            border-color: @color-livre;
+
+            &.selected {
+                background-color: @color-livre;
+                border-color: @color-livre;
+            }
+        }
+
+        &.medio {
+            background-color: lighten(@color-medio, 30%);
+            border-color: @color-medio;
+
+            &.selected {
+                background-color: @color-medio;
+                border-color: @color-medio;
+            }
+        }
+
+        &.cheio {
+            background-color: lighten(@color-cheio, 35%);
+            border-color: @color-cheio;
+            opacity: 0.6;
+            cursor: not-allowed;
+
+            &.selected {
+                background-color: @color-cheio;
+                border-color: @color-cheio;
+            }
+        }
+    }
+}
+
+.legenda-cores {
+    display: flex;
+    gap: @spacing-6;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: @spacing-4;
+    border-top: 1px solid @border;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: @spacing-3;
+    font-size: 14px;
+    font-weight: 500;
+
+    .color-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+
+        &.color-livre {
+            background-color: @color-livre;
+        }
+
+        &.color-medio {
+            background-color: @color-medio;
+        }
+
+        &.color-cheio {
+            background-color: @color-cheio;
+        }
+    }
+}
+
+// ============================================
+// HORÁRIOS
+// ============================================
+
+.horarios-wrapper {
+    background-color: @bg-card;
+    padding: @spacing-6;
+    border-radius: @border-radius-lg;
+    box-shadow: @shadow-sm;
+    margin-bottom: @spacing-6;
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: @spacing-4;
+        color: @primary;
+    }
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: @spacing-3;
+
+    @media (max-width: 640px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.horario-btn {
+    padding: @spacing-3 @spacing-4;
+    border: 2px solid @border;
+    border-radius: @border-radius;
+    background-color: @bg-card;
+    cursor: pointer;
+    transition: all @transition;
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-dark;
+
+    &:hover:not(.disabled) {
+        border-color: @secondary;
+        background-color: lighten(@secondary, 50%);
+    }
+
+    &.selected {
+        background-color: @secondary;
+        color: white;
+        border-color: @secondary;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #F3F4F6;
+    }
+}
+
+// ============================================
+// FORMULÁRIO
+// ============================================
+
+.form-agendamento {
+    background-color: @bg-card;
+    padding: @spacing-6;
+    border-radius: @border-radius-lg;
+    box-shadow: @shadow-sm;
+    margin-bottom: @spacing-6;
+}
+
+.form-group {
+    margin-bottom: @spacing-6;
+
+    input,
+    textarea {
+        width: 100%;
+        padding: @spacing-4;
+        border: 1px solid @border;
+        border-radius: @border-radius;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color @transition, box-shadow @transition;
+
+        &:focus {
+            outline: none;
+            border-color: @secondary;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        &::placeholder {
+            color: @text-light;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+}
+
+// ============================================
+// RESUMO DO AGENDAMENTO
+// ============================================
+
+.agendamento-resumo {
+    background-color: lighten(@secondary, 50%);
+    padding: @spacing-4;
+    border-radius: @border-radius;
+    margin-top: @spacing-6;
+    margin-bottom: @spacing-6;
+
+    h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: @spacing-3;
+        color: @primary;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: @spacing-2;
+        color: @text-dark;
+
+        strong {
+            font-weight: 600;
+        }
+
+        span {
+            color: @secondary;
+            font-weight: 600;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// ============================================
+// CONFIRMAÇÃO
+// ============================================
+
+.confirmacao {
+    text-align: center;
+    padding: @spacing-12 @spacing-6;
+
+    &__icon {
+        font-size: 64px;
+        margin-bottom: @spacing-6;
+        display: block;
+    }
+
+    h3 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: @spacing-3;
+        color: @primary;
+    }
+
+    p {
+        font-size: 16px;
+        color: @text-light;
+        margin-bottom: @spacing-4;
+    }
+
+    &__codigo {
+        background-color: @bg-light;
+        padding: @spacing-4;
+        border-radius: @border-radius;
+        margin-bottom: @spacing-8;
+
+        strong {
+            color: @secondary;
+            font-size: 18px;
+        }
+    }
+}
+
+// ============================================
+// BOTÕES
+// ============================================
+
+.btn {
+    padding: @spacing-3 @spacing-6;
+    border: none;
+    border-radius: @border-radius;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all @transition;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+
+    &--primary {
+        background-color: @secondary;
+        color: white;
+
+        &:hover:not(:disabled) {
+            background-color: darken(@secondary, 10%);
+            box-shadow: @shadow-md;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &--secondary {
+        background-color: @border;
+        color: @primary;
+
+        &:hover:not(:disabled) {
+            background-color: darken(@border, 10%);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &--full {
+        width: 100%;
+    }
+
+    &--next,
+    &--prev {
+        @media (max-width: 640px) {
+            width: 100%;
+        }
+    }
+}
+
+// ============================================
+// FOOTER
+// ============================================
+
+.footer {
+    background-color: @primary;
+    color: white;
+    padding: @spacing-8 @spacing-4;
+    margin-top: @spacing-12;
+
+    .container {
+        display: flex;
+        gap: @spacing-10;
+        margin-bottom: @spacing-8;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: @spacing-6;
+        }
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        width: 100%;
+        gap: @spacing-10;
+
+        @media (max-width: 768px) {
+            gap: @spacing-6;
+        }
+    }
+
+    &__section {
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: @spacing-3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: @spacing-2;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: @spacing-6;
+        text-align: center;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+// ============================================
+// UTILITÁRIOS
+// ============================================
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}

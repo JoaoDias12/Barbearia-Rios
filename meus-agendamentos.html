@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Rios | Meus Agendamentos</title>
+    <link rel="icon" href="img/icon.jpeg" type="image/jpeg">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">BR</span>
+                <div>
+                    <strong>Barbearia Rios</strong>
+                    <span>Agenda digital da barbearia</span>
+                </div>
+            </a>
+
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Agendar</a>
+                <a href="meus-agendamentos.html" class="nav-link">Meus agendamentos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="workspace-section">
+            <div class="container page-shell">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Área do cliente</span>
+                        <h2>Meus agendamentos</h2>
+                    </div>
+                    <p>O cliente pode acompanhar status, data, horário, barbeiro e observações.</p>
+                </div>
+
+                <div class="customer-panel">
+                    <div class="customer-panel__header">
+                        <div>
+                            <h3>Histórico</h3>
+                            <p>Lista local para demonstração. Depois podemos ligar isso no Firebase.</p>
+                        </div>
+                        <button class="btn btn-secondary" id="clearCompletedBtn">Limpar concluidos/cancelados</button>
+                    </div>
+                    <div class="appointments-list" id="appointmentsList"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <strong class="footer-secret-trigger" data-secret-admin>Barbearia Rios</strong>
+                <p>Histórico moderno de agendamentos.</p>
+            </div>
+            <div class="footer-meta">
+                <span>Seus agendamentos na Barbearia Rios.</span>
+                <span id="footerNow">Atualizado agora</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/firebase-config.js?v=20260509-2"></script>
+    <script src="js/app.js?v=20260509-2"></script>
+    <script src="js/meus-agendamentos.js?v=20260509-2"></script>
+</body>
+</html>

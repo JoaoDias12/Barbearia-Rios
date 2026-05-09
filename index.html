@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Rios | Agendar</title>
+    <link rel="icon" href="img/icon.png" type="image/png">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark"><img src="img/icon.png" style="width: 48px; height: 48px; object-fit: contain;"></span>
+                <div>
+                    <strong>Barbearia Rios</strong>
+                </div>
+            </a>
+
+            <nav class="top-nav">
+                <a href="index.html#agendar" class="nav-link">Agendar</a>
+                <a href="meus-agendamentos.html" class="nav-link">Meus agendamentos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" id="inicio">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">Agendamentos Fáceis</span>
+                    <h1>Sua barbearia organizada e sempre disponível.</h1>
+                    <div class="hero-actions">
+                        <a href="#agendar" class="btn btn-primary">Comecar agendamento</a>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+        </section>
+
+        <section class="workspace-section" id="agendar">
+            <div class="container page-shell">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Agendamento</span>
+                        <h2>Fluxo simples para o cliente</h2>
+                    </div>
+                    <p>Escolha o serviço, barbeiro, data e horário. O calendário mostra os dias mais cheios.</p>
+                </div>
+
+                <div class="booking-layout">
+                    <section class="booking-card">
+                        <div class="stepper">
+                            <button class="step-pill active" data-step-target="1">1. Servico</button>
+                            <button class="step-pill" data-step-target="2">2. Profissional</button>
+                            <button class="step-pill" data-step-target="3">3. Data e hora</button>
+                            <button class="step-pill" data-step-target="4">4. Confirmacao</button>
+                        </div>
+
+                        <div class="step-panel active" data-step="1">
+                            <div class="step-header">
+                                <h3>Escolha o serviço</h3>
+                            </div>
+                            <div class="selection-grid" id="servicesGrid"></div>
+                            <div class="step-actions">
+                                <button class="btn btn-primary" data-next-step="2">Continuar</button>
+                            </div>
+                        </div>
+
+                        <div class="step-panel" data-step="2">
+                            <div class="step-header">
+                                <h3>Escolha o barbeiro</h3>
+                                <p>Mostramos especialidade, horário e avaliação visual.</p>
+                            </div>
+                            <div class="selection-grid professional-grid" id="professionalsGrid"></div>
+                            <div class="step-actions">
+                                <button class="btn btn-secondary" data-prev-step="1">Voltar</button>
+                                <button class="btn btn-primary" data-next-step="3">Continuar</button>
+                            </div>
+                        </div>
+
+                        <div class="step-panel" data-step="3">
+                            <div class="step-header">
+                                <h3>Escolha data e horário</h3>
+                                <p>Os quadradinhos mudam conforme a ocupação do dia.</p>
+                            </div>
+
+                            <div class="calendar-card">
+                                <div class="calendar-header">
+                                    <button class="icon-btn" id="prevMonth" aria-label="Mes anterior">&#8592;</button>
+                                    <div>
+                                        <span class="calendar-label">Disponibilidade</span>
+                                        <h4 id="calendarMonthLabel">Mes</h4>
+                                    </div>
+                                    <button class="icon-btn" id="nextMonth" aria-label="Proximo mes">&#8594;</button>
+                                </div>
+
+                                <div class="calendar-grid calendar-weekdays" id="calendarWeekdays"></div>
+                                <div class="calendar-grid" id="calendarDays"></div>
+
+                                <div class="legend-row">
+                                    <span><i class="dot dot-green"></i>Livre</span>
+                                    <span><i class="dot dot-yellow"></i>Médio</span>
+                                    <span><i class="dot dot-red"></i>Cheio</span>
+                                </div>
+                            </div>
+
+                            <div class="time-block">
+                                <div class="time-block__header">
+                                    <div>
+                                        <span class="calendar-label">Horarios</span>
+                                        <h4 id="selectedDateLabel">Selecione um dia</h4>
+                                    </div>
+                                    <p id="selectedDayStatus">Escolha um dia no calendario para ver os horarios.</p>
+                                </div>
+                                <div class="time-grid" id="timesGrid"></div>
+                            </div>
+
+                            <div class="step-actions">
+                                <button class="btn btn-secondary" data-prev-step="2">Voltar</button>
+                                <button class="btn btn-primary" data-next-step="4">Continuar</button>
+                            </div>
+                        </div>
+
+                        <div class="step-panel" data-step="4">
+                            <div class="step-header">
+                                <h3>Confirme seus dados</h3>
+                                <p>Depois de confirmar, o pedido aparece em Meus agendamentos.</p>
+                            </div>
+
+                            <form id="bookingForm" class="booking-form">
+                                <div class="form-grid">
+                                    <label class="field">
+                                        <span>Nome</span>
+                                        <input type="text" id="clientName" placeholder="Seu nome" required>
+                                    </label>
+                                    <label class="field">
+                                        <span>Telefone</span>
+                                        <input type="tel" id="clientPhone" placeholder="(00) 00000-0000" required>
+                                    </label>
+                                    <label class="field">
+                                        <span>E-mail</span>
+                                        <input type="email" id="clientEmail" placeholder="voce@email.com" required>
+                                    </label>
+                                    <label class="field field-full">
+                                        <span>Observações</span>
+                                        <textarea id="clientNotes" rows="4" placeholder="Ex.: quero um fade médio"></textarea>
+                                    </label>
+                                    <label class="field field-full">
+                                        <span>Forma de pagamento</span>
+                                        <select id="paymentMethod" required>
+                                            <option value="">Selecione a forma de pagamento</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <div class="summary-card">
+                                    <div class="summary-card__head">
+                                        <h4>Resumo do agendamento</h4>
+                                        <span class="summary-price" id="summaryPrice">R$ 0</span>
+                                    </div>
+                                    <div class="summary-grid">
+                                        <div><span>Serviço</span><strong id="summaryService">-</strong></div>
+                                        <div><span>Barbeiro</span><strong id="summaryProfessional">-</strong></div>
+                                        <div><span>Data</span><strong id="summaryDate">-</strong></div>
+                                        <div><span>Horário</span><strong id="summaryTime">-</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="step-actions">
+                                    <button type="button" class="btn btn-secondary" data-prev-step="3">Voltar</button>
+                                    <button type="submit" class="btn btn-primary">Confirmar agendamento</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace-section" id="produtos">
+            <div class="container page-shell">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Loja</span>
+                        <h2>Produtos recomendados</h2>
+                    </div>
+                    <p>Encontre tudo o que você precisa para manter sua barba e cabelo impecáveis.</p>
+                </div>
+
+                <div class="selection-grid professional-grid" id="productsGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <strong class="footer-secret-trigger" data-secret-admin>Barbearia Rios</strong>
+            </div>
+            <div class="footer-meta">
+                <span id="footerNow">Atualizado agora</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/firebase-config.js?v=20260509-3"></script>
+    <script src="js/app.js?v=20260509-3"></script>
+    <script src="js/agendamento.js?v=20260509-3"></script>
+</body>
+</html>
