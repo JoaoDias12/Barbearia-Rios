@@ -38,6 +38,7 @@ const bookingElements = {
 void initBookingPage();
 
 async function initBookingPage() {
+  bookingState.settings = await StudioApp.loadSettingsFromDatabase();
   StudioApp.applyTheme(bookingState.settings);
   StudioApp.initSecretAdminTrigger();
   bookingState.appointments = await StudioApp.loadAppointmentsFromDatabase();
