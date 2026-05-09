@@ -77,7 +77,10 @@ const StudioApp = (() => {
   }
 
   function saveSettings(settings) {
-    persist(STORAGE_KEYS.settings, normalizeSettings(settings));
+    const normalizedSettings = normalizeSettings(settings);
+    persist(STORAGE_KEYS.settings, normalizedSettings);
+    void syncSettingsToDatabase(normalizedSettings);
+    return normalizedSettings;
   }
 
   function normalizeSettings(settings) {
@@ -140,6 +143,39 @@ const StudioApp = (() => {
 
   function canUseRemoteAppointments() {
     return typeof readFromFirebase === "function" && typeof writeToFirebase === "function";
+  }
+
+  function canUseRemoteSettings() {
+    return typeof readFromFirebase === "function" && typeof writeToFirebase === "function";
+  }
+
+  async function loadSettingsFromDatabase() {
+    if (!canUseRemoteSettings()) {
+      return getSettings();
+    }
+
+    const remoteSettings = await readFromFirebase("settings");
+    const normalizedSettings = normalizeSettings(remoteSettings || getSettings());
+    persist(STORAGE_KEYS.settings, normalizedSettings);
+    return normalizedSettings;
+  }
+
+  async function syncSettingsToDatabase(settings) {
+    const normalizedSettings = normalizeSettings(settings);
+
+    if (!canUseRemoteSettings()) {
+      return normalizedSettings;
+    }
+
+    await writeToFirebase("settings", normalizedSettings);
+    return normalizedSettings;
+  }
+
+  async function saveSettingsAndSync(settings) {
+    const normalizedSettings = normalizeSettings(settings);
+    persist(STORAGE_KEYS.settings, normalizedSettings);
+    await syncSettingsToDatabase(normalizedSettings);
+    return normalizedSettings;
   }
 
   async function loadAppointmentsFromDatabase() {
@@ -577,6 +613,9 @@ const StudioApp = (() => {
     toIsoDate,
     getSettings,
     saveSettings,
+    loadSettingsFromDatabase,
+    syncSettingsToDatabase,
+    saveSettingsAndSync,
     getAppointments,
     saveAppointments,
     loadAppointmentsFromDatabase,
