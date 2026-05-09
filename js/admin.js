@@ -47,21 +47,23 @@ const adminEls = {
   footerNow: document.getElementById("footerNow")
 };
 
-initAdminPage();
+void initAdminPage();
 
-function initAdminPage() {
+async function initAdminPage() {
+  adminState.settings = await StudioApp.loadSettingsFromDatabase();
+  adminState.appointments = await StudioApp.loadAppointmentsFromDatabase();
   StudioApp.applyTheme(adminState.settings);
   adminEls.footerNow.textContent = `Atualizado em ${StudioApp.formatDateTime(new Date())}`;
   syncThemeInputs();
   bindAdminEvents();
-  updateAdminVisibility();
+  await updateAdminVisibility();
 }
 
 function bindAdminEvents() {
   adminEls.loginForm.addEventListener("submit", handleAdminLogin);
-  adminEls.logoutBtn.addEventListener("click", () => {
+  adminEls.logoutBtn.addEventListener("click", async () => {
     StudioApp.setAdminSession(false);
-    updateAdminVisibility();
+    await updateAdminVisibility();
   });
   adminEls.themeForm.addEventListener("submit", handleThemeSubmit);
   adminEls.themePrimary.addEventListener("change", updateThemePreview);
@@ -90,14 +92,14 @@ function bindAdminEvents() {
   }
 }
 
-function updateAdminVisibility() {
+async function updateAdminVisibility() {
   const loggedIn = StudioApp.hasAdminSession();
   adminEls.loginShell.classList.toggle("hidden", loggedIn);
   adminEls.panelShell.classList.toggle("hidden", !loggedIn);
 
   if (loggedIn) {
-    adminState.settings = StudioApp.getSettings();
-    adminState.appointments = StudioApp.getAppointments();
+    adminState.settings = await StudioApp.loadSettingsFromDatabase();
+    adminState.appointments = await StudioApp.loadAppointmentsFromDatabase();
     StudioApp.applyTheme(adminState.settings);
     syncThemeInputs();
     renderProfessionalsEditor();
@@ -119,7 +121,7 @@ function updateAdminVisibility() {
   }
 }
 
-function handleAdminLogin(event) {
+async function handleAdminLogin(event) {
   event.preventDefault();
   const username = document.getElementById("adminUsername").value.trim();
   const password = document.getElementById("adminPassword").value.trim();
@@ -128,7 +130,7 @@ function handleAdminLogin(event) {
     StudioApp.setAdminSession(true);
     adminEls.loginError.textContent = "";
     adminEls.loginForm.reset();
-    updateAdminVisibility();
+    await updateAdminVisibility();
     return;
   }
 
