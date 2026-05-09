@@ -3,12 +3,13 @@ const myBookingsState = {
   appointments: StudioApp.getAppointments()
 };
 
-StudioApp.applyTheme(myBookingsState.settings);
 StudioApp.initSecretAdminTrigger();
 void initMyBookingsPage();
 bindMyBookingsEvents();
 
 async function initMyBookingsPage() {
+  myBookingsState.settings = await StudioApp.loadSettingsFromDatabase();
+  StudioApp.applyTheme(myBookingsState.settings);
   myBookingsState.appointments = await StudioApp.loadAppointmentsFromDatabase();
   renderMyBookingsPage();
 }
